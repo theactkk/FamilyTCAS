@@ -1,0 +1,465 @@
+import { useState } from 'react';
+import { BookText, PenTool, School, Mail, Phone, MessageSquareText, Users, Clock, Lightbulb, Share2 } from 'lucide-react';
+
+function App() {
+  const [formData, setFormData] = useState({
+    privacyAgreed: false,
+    prefix: '',
+    fullName: '',
+    childGrade: '',
+    schoolName: '',
+    schoolProvince: '',
+    phoneNumber: '',
+    email: '',
+    lineId: '',
+    desiredFaculty: '',
+    contactTime: '',
+    expectations: '',
+    howDidYouKnow: [],
+    otherChannel: ''
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
+
+  // Replace this with your deployed Google Apps Script Web App URL
+  const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzgsVUT2uA3uF9YeZ5Q0nZnwEixIpSMMNkrMTGR2mJ8lv6p2e4-cBLeZDLiZldh7GFXIA/exec'; 
+
+  const faculties = [
+    'คณะแพทยศาสตร์', 'คณะทันตแพทยศาสตร์', 'คณะเภสัชศาสตร์', 'คณะสัตวแพทยศาสตร์',
+    'คณะเทคนิคการแพทย์', 'คณะพยาบาลศาสตร์', 'คณะสาธารณสุขศาสตร์', 'คณะวิทยาศาสตร์',
+    'คณะวิศวกรรมศาสตร์', 'คณะเกษตรศาสตร์', 'คณะเทคโนโลยี', 'คณะสถาปัตยกรรมศาสตร์',
+    'คณะศึกษาศาสตร์', 'คณะมนุษยศาสตร์และสังคมศาสตร์', 'คณะนิติศาสตร์',
+    'คณะบริหารธุรกิจและการบัญชี', 'คณะเศรษฐศาสตร์', 'คณะศิลปกรรมศาสตร์',
+    'คณะวิทยาการสารสนเทศ', 'คณะวิทยาการจัดการ', 'วิทยาลัยการปกครองท้องถิ่น',
+    'วิทยาลัยนานาชาติ', 'วิทยาลัยการคอมพิวเตอร์', 'คณะสหวิทยาการ (วิทยาเขตหนองคาย)'
+  ];
+
+  const contactTimes = Array.from({ length: 11 }, (_, i) => `${9 + i}.00 น.`);
+
+  const channels = [
+    'Facebook', 'TikTok', 'Line OA', 'เพื่อนแนะนำ', 'ครูแนะนำ', 'โฆษณาออนไลน์',
+    'เว็บไซต์ The Act', 'Instagram', 'Twitter', 'Youtube', 'ผู้ปกครองแนะนำ', 'รุ่นพี่แนะนำ'
+  ];
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === 'checkbox') {
+      if (name === 'privacyAgreed') {
+        setFormData({ ...formData, [name]: checked });
+      } else if (name === 'howDidYouKnow') {
+        setFormData(prev => ({
+          ...prev,
+          howDidYouKnow: checked
+            ? [...prev.howDidYouKnow, value]
+            : prev.howDidYouKnow.filter(channel => channel !== value)
+        }));
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const validateEmail = (email) => {
+    return email.endsWith('@gmail.com');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormError('');
+
+    if (!formData.privacyAgreed) {
+      setFormError('กรุณากดยอมรับนโยบายความเป็นส่วนตัว');
+      return;
+    }
+    if (!validateEmail(formData.email)) {
+      setFormError('อีเมลผู้สมัครต้องเป็น Gmail เท่านั้น');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Create a JavaScript object to hold the form data
+      const dataToSend = {
+        timestamp: new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }), // Add timestamp
+        ...formData,
+        howDidYouKnow: formData.howDidYouKnow.join(', ') + (formData.otherChannel ? `, อื่นๆ: ${formData.otherChannel}` : '')
+      };
+
+      // Remove otherChannel if it's empty and not part of howDidYouKnow
+      if (formData.otherChannel && !formData.howDidYouKnow.includes('อื่นๆ (กรุณาระบุ)')) {
+        delete dataToSend.otherChannel;
+      }
+      
+      const response = await fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script Web App
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(dataToSend).toString(),
+      });
+
+      // Since mode is 'no-cors', we can't check response.ok or response.json()
+      // We assume success if no error is thrown
+      setIsSubmitted(true);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormError('เกิดข้อผิดพลาดในการส่งฟอร์ม กรุณาลองใหม่อีกครั้ง');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-100 to-blue-200 flex items-center justify-center p-4 font-inter">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://unpkg.com/lucide-react@latest"></script>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        /* Adjusted styles for form inputs to make them more prominent */
+        .form-input, .form-select, .form-textarea {
+          @apply w-full p-3 border-2 border-blue-400 rounded-xl shadow-md focus:ring-4 focus:ring-blue-500 focus:ring-inset focus:border-blue-600 transition duration-300 ease-in-out bg-white text-gray-800 placeholder-gray-500;
+        }
+        .form-label {
+          @apply block text-sm font-semibold text-blue-700 mb-1;
+        }
+        .icon-wrapper {
+            @apply absolute left-3 top-1/2 -translate-y-1/2 text-blue-600 opacity-90; /* Increased icon prominence */
+        }
+      `}</style>
+
+      <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-3xl w-full mx-auto my-8 border-t-[10px] border-blue-500 transform transition-all duration-500 hover:shadow-3xl hover:scale-[1.005]">
+        {!isSubmitted ? (
+          <>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-center text-blue-800 mb-4 leading-tight">
+              สมัครโครงการ<br className="sm:hidden" />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                พ่อแม่เข้าใจ ลูกมีชัย TCAS
+              </span>
+              <br className="sm:hidden" />– แนะแนวสอบเข้ามข. รอบไหนก็ไม่พลาด
+            </h1>
+            <p className="text-center text-gray-600 mb-8 text-lg md:text-xl font-medium">
+              มาร่วมเตรียมความพร้อมให้ลูกเข้าสู่รั้วมหาวิทยาลัยขอนแก่น
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Privacy Policy Checkbox */}
+              <div className="relative p-4 bg-blue-100/70 rounded-xl border border-blue-200 shadow-inner">
+                <input
+                  type="checkbox"
+                  id="privacyAgreed"
+                  name="privacyAgreed"
+                  checked={formData.privacyAgreed}
+                  onChange={handleChange}
+                  className="mr-3 h-5 w-5 text-blue-600 rounded-md focus:ring-blue-500 focus:ring-offset-2 border-blue-300 transition duration-200 ease-in-out"
+                  required
+                />
+                <label htmlFor="privacyAgreed" className="text-sm md:text-base font-medium text-gray-700 select-none">
+                  ข้าพเจ้าได้ทำความเข้าใจรายละเอียดค่าย และมีความประสงค์จะกรอกข้อมูลเพื่อสมัครติวครั้งนี้ และมี
+                  <a href="https://www.theactkk.net/%E0%B8%99%E0%B9%82%E0%B8%A2%E0%B8%B2%E0%B8%A2%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B8%AA%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%95%E0%B8%B1%E0%B8%A7" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 hover:underline ml-1 font-semibold transition duration-200">นโยบายความเป็นส่วนตัว</a>
+                </label>
+              </div>
+
+              {formError && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative text-center text-sm" role="alert">
+                  <strong className="font-bold">เกิดข้อผิดพลาด!</strong>
+                  <span className="block sm:inline ml-2">{formError}</span>
+                </div>
+              )}
+
+              {/* คำนำหน้า */}
+              <div>
+                <label htmlFor="prefix" className="form-label flex items-center"><Users size={16} className="mr-2" />คำนำหน้า</label>
+                <div className="relative">
+                  <select
+                    id="prefix"
+                    name="prefix"
+                    value={formData.prefix}
+                    onChange={handleChange}
+                    className="form-select pl-10 appearance-none cursor-pointer"
+                    required
+                  >
+                    <option value="">เลือก</option>
+                    <option value="นาย">นาย</option>
+                    <option value="นาง">นาง</option>
+                    <option value="นางสาว">นางสาว</option>
+                  </select>
+                  <div className="icon-wrapper"><Users size={20} /></div>
+                </div>
+              </div>
+
+              {/* ชื่อ - นามสกุล */}
+              <div>
+                <label htmlFor="fullName" className="form-label flex items-center"><PenTool size={16} className="mr-2" />ชื่อ - นามสกุล</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className="form-input pl-10"
+                    placeholder="ป้อนชื่อ-นามสกุล"
+                    required
+                  />
+                  <div className="icon-wrapper"><PenTool size={20} /></div>
+                </div>
+              </div>
+
+              {/* มีบุตรกำลังเรียนระดับชั้น */}
+              <div>
+                <label htmlFor="childGrade" className="form-label flex items-center"><School size={16} className="mr-2" />มีบุตรกำลังเรียนระดับชั้น</label>
+                <div className="relative">
+                  <select
+                    id="childGrade"
+                    name="childGrade"
+                    value={formData.childGrade}
+                    onChange={handleChange}
+                    className="form-select pl-10 appearance-none cursor-pointer"
+                    required
+                  >
+                    <option value="">เลือก</option>
+                    {['ม.1', 'ม.2', 'ม.3', 'ม.4', 'ม.5', 'ม.6'].map(grade => (
+                      <option key={grade} value={grade}>{grade}</option>
+                    ))}
+                  </select>
+                  <div className="icon-wrapper"><School size={20} /></div>
+                </div>
+              </div>
+
+              {/* โรงเรียน */}
+              <div>
+                <label htmlFor="schoolName" className="form-label flex items-center"><BookText size={16} className="mr-2" />โรงเรียน</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="schoolName"
+                    name="schoolName"
+                    value={formData.schoolName}
+                    onChange={handleChange}
+                    className="form-input pl-10"
+                    placeholder="ป้อนชื่อโรงเรียน"
+                    required
+                  />
+                  <div className="icon-wrapper"><BookText size={20} /></div>
+                </div>
+              </div>
+
+              {/* จังหวัดที่ตั้งโรงเรียน */}
+              <div>
+                <label htmlFor="schoolProvince" className="form-label flex items-center"><Share2 size={16} className="mr-2" />จังหวัดที่ตั้งโรงเรียน</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="schoolProvince"
+                    name="schoolProvince"
+                    value={formData.schoolProvince}
+                    onChange={handleChange}
+                    className="form-input pl-10"
+                    placeholder="ป้อนจังหวัด"
+                    required
+                  />
+                  <div className="icon-wrapper"><Share2 size={20} /></div>
+                </div>
+              </div>
+
+              {/* เบอร์มือถือผู้สมัคร */}
+              <div>
+                <label htmlFor="phoneNumber" className="form-label flex items-center"><Phone size={16} className="mr-2" />เบอร์มือถือผู้สมัคร</label>
+                <div className="relative">
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    className="form-input pl-10"
+                    placeholder="ป้อนเบอร์มือถือ"
+                    required
+                  />
+                  <div className="icon-wrapper"><Phone size={20} /></div>
+                </div>
+              </div>
+
+              {/* อีเมลผู้สมัครเพื่อรับไฟล์เอกสาร ต้องเป็น Gmail เท่านั้น */}
+              <div>
+                <label htmlFor="email" className="form-label flex items-center"><Mail size={16} className="mr-2" />อีเมลผู้สมัครเพื่อรับไฟล์เอกสาร (ต้องเป็น Gmail เท่านั้น)</label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="form-input pl-10"
+                    placeholder="yourname@gmail.com"
+                    required
+                  />
+                  <div className="icon-wrapper"><Mail size={20} /></div>
+                </div>
+              </div>
+
+              {/* LINE ID ผู้สมัคร */}
+              <div>
+                <label htmlFor="lineId" className="form-label flex items-center"><MessageSquareText size={16} className="mr-2" />LINE ID ผู้สมัคร</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="lineId"
+                    name="lineId"
+                    value={formData.lineId}
+                    onChange={handleChange}
+                    className="form-input pl-10"
+                    placeholder="ป้อน LINE ID"
+                  />
+                  <div className="icon-wrapper"><MessageSquareText size={20} /></div>
+                </div>
+              </div>
+
+              {/* คณะ/สาขาที่อยากเตรียมลูกเข้าเรียน */}
+              <div>
+                <label htmlFor="desiredFaculty" className="form-label flex items-center"><BookText size={16} className="mr-2" />คณะ/สาขาที่อยากเตรียมลูกเข้าเรียน</label>
+                <div className="relative">
+                  <select
+                    id="desiredFaculty"
+                    name="desiredFaculty"
+                    value={formData.desiredFaculty}
+                    onChange={handleChange}
+                    className="form-select pl-10 appearance-none cursor-pointer"
+                    required
+                  >
+                    <option value="">เลือกคณะ/สาขา</option>
+                    {faculties.map(faculty => (
+                      <option key={faculty} value={faculty}>{faculty}</option>
+                    ))}
+                  </select>
+                  <div className="icon-wrapper"><BookText size={20} /></div>
+                </div>
+              </div>
+
+              {/* ช่วงเวลาที่สะดวกให้ติดต่อกลับ */}
+              <div>
+                <label htmlFor="contactTime" className="form-label flex items-center"><Clock size={16} className="mr-2" />ช่วงเวลาที่สะดวกให้ติดต่อกลับ</label>
+                <div className="relative">
+                  <select
+                    id="contactTime"
+                    name="contactTime"
+                    value={formData.contactTime}
+                    onChange={handleChange}
+                    className="form-select pl-10 appearance-none cursor-pointer"
+                    required
+                  >
+                    <option value="">เลือกเวลา</option>
+                    {contactTimes.map(time => (
+                      <option key={time} value={time}>{time}</option>
+                    ))}
+                  </select>
+                  <div className="icon-wrapper"><Clock size={20} /></div>
+                </div>
+              </div>
+
+              {/* ความคาดหวังในการร่วมโครงการกับ The Act ในครั้งนี้ */}
+              <div>
+                <label htmlFor="expectations" className="form-label flex items-center"><Lightbulb size={16} className="mr-2" />ความคาดหวังในการร่วมโครงการกับ The Act ในครั้งนี้</label>
+                <div className="relative">
+                  <textarea
+                    id="expectations"
+                    name="expectations"
+                    value={formData.expectations}
+                    onChange={handleChange}
+                    rows="4"
+                    className="form-textarea pl-10 resize-y"
+                    placeholder="ป้อนความคาดหวังของคุณ"
+                  ></textarea>
+                  <div className="icon-wrapper top-4 -translate-y-0"><Lightbulb size={20} /></div>
+                </div>
+              </div>
+
+              {/* คุณรู้จักกิจกรรมของ The Act ผ่านช่องทางใดบ้าง? */}
+              <div>
+                <label className="form-label flex items-center mb-2"><Share2 size={16} className="mr-2" />คุณรู้จักกิจกรรมของ The Act ผ่านช่องทางใดบ้าง? (เลือกได้หลายข้อ)</label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
+                  {channels.map(channel => (
+                    <div key={channel} className="flex items-center bg-blue-50/70 p-2 rounded-lg shadow-sm">
+                      <input
+                        type="checkbox"
+                        id={`channel-${channel}`}
+                        name="howDidYouKnow"
+                        value={channel}
+                        checked={formData.howDidYouKnow.includes(channel)}
+                        onChange={handleChange}
+                        className="mr-2 h-4 w-4 text-blue-600 rounded focus:ring-blue-500 transition duration-200 ease-in-out"
+                      />
+                      <label htmlFor={`channel-${channel}`} className="text-sm font-medium">{channel}</label>
+                    </div>
+                  ))}
+                  <div className="flex items-center bg-blue-50/70 p-2 rounded-lg shadow-sm">
+                    <input
+                      type="checkbox"
+                      id="channel-other"
+                      name="howDidYouKnow"
+                      value="อื่นๆ (กรุณาระบุ)"
+                      checked={formData.howDidYouKnow.includes('อื่นๆ (กรุณาระบุ)')}
+                      onChange={handleChange}
+                      className="mr-2 h-4 w-4 text-blue-600 rounded focus:ring-blue-500 transition duration-200 ease-in-out"
+                    />
+                    <label htmlFor="channel-other" className="text-sm font-medium">อื่นๆ (กรุณาระบุ)</label>
+                  </div>
+                  {formData.howDidYouKnow.includes('อื่นๆ (กรุณาระบุ)') && (
+                    <input
+                      type="text"
+                      name="otherChannel"
+                      value={formData.otherChannel}
+                      onChange={handleChange}
+                      className="form-input mt-2 col-span-full"
+                      placeholder="โปรดระบุช่องทางอื่นๆ"
+                    />
+                  )}
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-extrabold py-4 px-6 rounded-xl shadow-xl transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400 active:from-blue-700 active:to-purple-700 text-lg tracking-wide animate-pulse-once"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'กำลังส่งใบสมัคร...' : 'ส่งใบสมัคร'}
+              </button>
+            </form>
+          </>
+        ) : (
+          <div className="text-center py-10 px-4">
+            <svg className="w-28 h-28 text-green-500 mx-auto mb-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h2 className="text-3xl md:text-4xl font-bold text-green-700 mb-4">สมัครเรียบร้อยแล้ว!</h2>
+            <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
+              คุณได้สมัครยืนยันรับสิทธิ์ติวฟรี เรียบร้อยแล้ว ขอขอบคุณที่ร่วมโครงการ!
+            </p>
+            <p className="text-xl md:text-2xl font-semibold text-blue-700 mb-6">
+              อย่าลืม! กดเข้ากลุ่มไลน์ <br className="sm:hidden" />
+              <span className="font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-cyan-600">
+                พ่อแม่เข้าใจ ลูกมีชัย TCAS – แนะแนวสอบเข้า มข.
+              </span>
+            </p>
+            <a
+              href="https://line.me/ti/g/VLAxWc53Nb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110 text-lg md:text-xl animate-pulse"
+            >
+              คลิกที่นี่
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;
