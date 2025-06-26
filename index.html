@@ -3,155 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สมัครโครงการพ่อแม่เข้าใจ ลูกมีชัย TCAS</title>
+    <title>แบบฟอร์มลงทะเบียน TCAS แนะแนว</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom scrollbar for dropdowns */
-        select::-webkit-scrollbar {
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e0f2fe; /* Light blue background */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
             width: 8px;
         }
-        select::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
-        select::-webkit-scrollbar-thumb {
-            background: #888;
+        ::-webkit-scrollbar-thumb {
+            background: #90cdf4; /* Light blue */
             border-radius: 10px;
         }
-        select::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-            background-color: #e0f2f7; /* Light blue background */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #63b3ed; /* Slightly darker blue */
         }
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl max-w-4xl w-full border border-blue-200">
-        <h1 class="text-3xl sm:text-4xl font-bold text-center text-blue-800 mb-6 sm:mb-8 flex items-center justify-center gap-3">
-            <i class="fas fa-graduation-cap text-blue-600"></i>
-            สมัครโครงการพ่อแม่เข้าใจ ลูกมีชัย TCAS – แนะแนวสอบเข้ามข. รอบไหนก็ไม่พลาด
-        </h1>
+    <div class="w-full max-w-4xl bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg border border-blue-200">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-blue-800 mb-2 leading-tight">
+                พ่อแม่เข้าใจ ลูกมีชัย TCAS - แนะแนวเข้ามข. รอบไหนก็ไม่พลาด
+            </h1>
+            <p class="text-base sm:text-lg text-blue-600 font-medium">
+                สมัครโครงการพ่อแม่เข้าใจ ลูกมีชัย TCAS แนะแนวเข้ามข. รูปแบบ Online @Zoom
+                <br class="hidden sm:inline"> วันอังคาร ที่ 8 ก.ค. 2568 เวลา 19.00-20.30 น.
+            </p>
+        </div>
 
-        <!-- Form for Google Sheet submission -->
-        <!-- IMPORTANT: Replace 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE' with your actual Google Apps Script URL -->
-        <form id="applicationForm" class="space-y-6" action="https://script.google.com/macros/s/AKfycbx39oN2w9a2P9k9gpDn38ZudSryro87D2D2G7J-dbLpMEmfKmByvRcNkzVw1-5aQeKLRA/exec" method="POST">
-            <!-- Acceptance Checkbox -->
-            <div class="bg-blue-50 p-4 rounded-xl flex items-start space-x-3 border border-blue-200">
-                <input type="checkbox" id="acceptTerms" name="acceptTerms" required
-                       class="mt-1 w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                <label for="acceptTerms" class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                    ข้าพเจ้าได้ทำความเข้าใจรายละเอียดโครงการ และมีความประสงค์จะกรอกข้อมูลเพื่อสมัครร่วมโครงการครั้งนี้ และยอมรับ
-                    <a href="https://www.theactkk.net/นโยบายความเป็นส่วนตัว" target="_blank"
-                       class="text-blue-600 hover:underline font-medium">นโยบายความเป็นส่วนตัว</a>
+        <!-- Registration Form -->
+        <form id="registrationForm" class="space-y-6">
+            <!-- Privacy Policy Checkbox -->
+            <div class="bg-blue-50 p-4 rounded-lg flex items-start space-x-3 shadow-sm">
+                <input type="checkbox" id="consent" name="consent" required
+                       class="mt-1 w-5 h-5 text-blue-600 bg-blue-100 border-blue-300 rounded focus:ring-blue-500">
+                <label for="consent" class="text-sm sm:text-base text-blue-800 font-medium cursor-pointer">
+                    <svg class="inline-block w-5 h-5 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-9a1 1 0 00-2 0v2a1 1 0 002 0V9zm3 0a1 1 0 00-2 0v2a1 1 0 002 0V9zm-1.707-3.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586l-1.293-1.293z" clip-rule="evenodd"></path>
+                    </svg>
+                    ข้าพเจ้าได้ทำความเข้าใจรายละเอียดค่าย และมีความประสงค์จะกรอกข้อมูลเพื่อสมัครติวครั้งนี้ และอ่าน
+                    <a href="https://www.theactkk.net/นโยบายความเป็นส่วนตัว" target="_blank" class="text-blue-700 hover:underline font-semibold">นโยบายความเป็นส่วนตัว</a> เรียบร้อยแล้ว
                 </label>
             </div>
 
-            <!-- คำนำหน้า (Title) -->
-            <div>
-                <label for="prefix" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-user text-blue-500 mr-2"></i>คำนำหน้า
-                </label>
-                <select id="prefix" name="prefix" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800">
-                    <option value="">-- เลือก --</option>
-                    <option value="นาย">นาย</option>
-                    <option value="นาง">นาง</option>
-                    <option value="นางสาว">นางสาว</option>
-                </select>
+            <!-- Parent Information -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="parentSalutation" class="block text-blue-800 text-sm font-semibold mb-1">
+                        <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                        คำนำหน้า (ผู้ปกครอง) <span class="text-red-500">*</span>
+                    </label>
+                    <select id="parentSalutation" name="parentSalutation" required
+                            class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                        <option value="">เลือกคำนำหน้า</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                        <option value="นางสาว">นางสาว</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="parentName" class="block text-blue-800 text-sm font-semibold mb-1">
+                        <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                        </svg>
+                        ชื่อ - นามสกุล (ผู้ปกครอง) <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="parentName" name="parentName" required
+                           class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                </div>
             </div>
 
-            <!-- ชื่อ - นามสกุล (Full Name) -->
             <div>
-                <label for="fullName" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-signature text-blue-500 mr-2"></i>ชื่อ - นามสกุล
+                <label for="parentMobile" class="block text-blue-800 text-sm font-semibold mb-1">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.774a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                    </svg>
+                    เบอร์มือถือ (ผู้ปกครอง) <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="fullName" name="fullName" required
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                       placeholder="ป้อนชื่อและนามสกุลของคุณ">
+                <input type="tel" id="parentMobile" name="parentMobile" required pattern="[0-9]{10}"
+                       title="กรุณากรอกเบอร์มือถือ 10 หลัก"
+                       class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
             </div>
 
-            <!-- มีบุตรกำลังเรียนระดับชั้น (Child's Grade) -->
-            <div>
-                <label for="childGrade" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-child text-blue-500 mr-2"></i>มีบุตรกำลังเรียนระดับชั้น
-                </label>
-                <select id="childGrade" name="childGrade" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800">
-                    <option value="">-- เลือก --</option>
-                    <option value="ม.1">ม.1</option>
-                    <option value="ม.2">ม.2</option>
-                    <option value="ม.3">ม.3</option>
-                    <option value="ม.4">ม.4</option>
-                    <option value="ม.5">ม.5</option>
-                    <option value="ม.6">ม.6</option>
-                </select>
+            <!-- Child Information -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="childGrade" class="block text-blue-800 text-sm font-semibold mb-1">
+                        <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2H4V5zm2-2h4V5H6V3zm3 4H4v4h5V7zm-3 5H4v4h2v-4z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd" d="M12 7h4v4h-4V7zm3 5h-3v4h3v-4z" clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd" d="M10 2h4a2 2 0 012 2v4h-6V2zm-3 5v4H4V7h3zm-3 5v4h2v-4H4zm11 0h-3v4h3v-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        มีบุตรกำลังเรียนระดับชั้น <span class="text-red-500">*</span>
+                    </label>
+                    <select id="childGrade" name="childGrade" required
+                            class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                        <option value="">เลือกระดับชั้น</option>
+                        <option value="ม.1">ม.1</option>
+                        <option value="ม.2">ม.2</option>
+                        <option value="ม.3">ม.3</option>
+                        <option value="ม.4">ม.4</option>
+                        <option value="ม.5">ม.5</option>
+                        <option value="ม.6">ม.6</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="childName" class="block text-blue-800 text-sm font-semibold mb-1">
+                        <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+                        </svg>
+                        ชื่อ - นามสกุล (บุตร) <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="childName" name="childName" required
+                           class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                </div>
             </div>
 
-            <!-- โรงเรียน (School) -->
-            <div>
-                <label for="schoolName" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-school text-blue-500 mr-2"></i>โรงเรียน
-                </label>
-                <input type="text" id="schoolName" name="schoolName" required
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                       placeholder="ป้อนชื่อโรงเรียนของบุตรหลาน">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="childSchool" class="block text-blue-800 text-sm font-semibold mb-1">
+                        <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                        </svg>
+                        โรงเรียน (บุตร) <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="childSchool" name="childSchool" required
+                           class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                </div>
+                <div>
+                    <label for="schoolProvince" class="block text-blue-800 text-sm font-semibold mb-1">
+                        <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        จังหวัดที่ตั้งโรงเรียน <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="schoolProvince" name="schoolProvince" required
+                           class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                </div>
             </div>
 
-            <!-- จังหวัดที่ตั้งโรงเรียน (School Province) -->
+            <!-- Applicant Contact Information -->
+            <!-- Removed: เบอร์มือถือผู้สมัคร (Applicant Mobile) -->
+
             <div>
-                <label for="schoolProvince" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>จังหวัดที่ตั้งโรงเรียน
+                <label for="applicantEmail" class="block text-blue-800 text-sm font-semibold mb-1">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                    </svg>
+                    อีเมลผู้สมัครเพื่อรับไฟล์เอกสาร (ต้องเป็น Gmail เท่านั้น) <span class="text-red-500">*</span>
                 </label>
-                <input type="text" id="schoolProvince" name="schoolProvince" required
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                       placeholder="ป้อนจังหวัดที่ตั้งโรงเรียน">
+                <input type="email" id="applicantEmail" name="applicantEmail" required
+                       pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                       title="กรุณากรอกอีเมล Gmail ที่ถูกต้อง"
+                       class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                <p id="emailError" class="text-red-500 text-xs mt-1 hidden">กรุณากรอกอีเมล Gmail ที่ถูกต้อง</p>
             </div>
 
-            <!-- เบอร์มือถือผู้สมัคร (Mobile Number) -->
             <div>
-                <label for="mobileNumber" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-phone text-blue-500 mr-2"></i>เบอร์มือถือผู้สมัคร
+                <label for="lineId" class="block text-blue-800 text-sm font-semibold mb-1">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.76-1.39A6.459 6.459 0 012 15a2 2 0 00-2 2v1a1 1 0 001 1h16a1 1 0 001-1v-1a1 1 0 00-1-1zm-6-2a2 2 0 11-4 0 2 2 0 014 0zM8 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+                    </svg>
+                    LINE ID ผู้สมัคร <span class="text-red-500">*</span>
                 </label>
-                <input type="tel" id="mobileNumber" name="mobileNumber" required
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                       placeholder="ป้อนเบอร์มือถือของคุณ">
+                <input type="text" id="lineId" name="lineId" required
+                       class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
             </div>
 
-            <!-- อีเมลผู้สมัครเพื่อรับไฟล์เอกสาร ต้องเป็น Gmail เท่านั้น (Email - Gmail only) -->
+            <!-- Program Specific Information -->
             <div>
-                <label for="email" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-envelope text-blue-500 mr-2"></i>อีเมลผู้สมัครเพื่อรับไฟล์เอกสาร
-                    <span class="text-red-500 text-xs">(ต้องเป็น Gmail เท่านั้น)</span>
-                </label>
-                <input type="email" id="email" name="email" required pattern=".*@gmail\.com$" title="โปรดใช้อีเมล Gmail เท่านั้น"
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                       placeholder="yourname@gmail.com">
-            </div>
-
-            <!-- LINE ID ผู้สมัคร (LINE ID) -->
-            <div>
-                <label for="lineId" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fab fa-line text-blue-500 mr-2"></i>LINE ID ผู้สมัคร
-                </label>
-                <input type="text" id="lineId" name="lineId"
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                       placeholder="ป้อน LINE ID ของคุณ (ไม่บังคับ)">
-            </div>
-
-            <!-- คณะ/สาขาที่อยากเตรียมลูกเข้าเรียน (Desired Faculty/Major) -->
-            <div>
-                <label for="desiredFaculty" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-book-open text-blue-500 mr-2"></i>คณะ/สาขาที่อยากเตรียมลูกเข้าเรียน
+                <label for="desiredFaculty" class="block text-blue-800 text-sm font-semibold mb-1">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4a2 2 0 00-2 2v6a2 2 0 002 2l2-2h4a2 2 0 002-2V6a2 2 0 00-2-2H4zm10 8l1 1h3V6a2 2 0 00-2-2h-3.586a1 1 0 00-.707.293L11 7.414V10a2 2 0 01-2 2H4z"></path>
+                    </svg>
+                    คณะ/สาขาที่อยากเตรียมลูกเข้าเรียน <span class="text-red-500">*</span>
                 </label>
                 <select id="desiredFaculty" name="desiredFaculty" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800">
-                    <option value="">-- เลือกคณะ/สาขา --</option>
+                        class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                    <option value="">เลือกคณะ/สาขา</option>
                     <option value="คณะแพทยศาสตร์">คณะแพทยศาสตร์</option>
                     <option value="คณะทันตแพทยศาสตร์">คณะทันตแพทยศาสตร์</option>
                     <option value="คณะเภสัชศาสตร์">คณะเภสัชศาสตร์</option>
@@ -179,177 +224,176 @@
                 </select>
             </div>
 
-            <!-- ช่วงเวลาที่สะดวกให้ติดต่อกลับ (Preferred Contact Time) -->
             <div>
-                <label for="contactTime" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-clock text-blue-500 mr-2"></i>ช่วงเวลาที่สะดวกให้ติดต่อกลับ
+                <label for="contactTime" class="block text-blue-800 text-sm font-semibold mb-1">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
+                    </svg>
+                    ช่วงเวลาที่สะดวกให้ติดต่อกลับ <span class="text-red-500">*</span>
                 </label>
                 <select id="contactTime" name="contactTime" required
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800">
-                    <option value="">-- เลือกเวลา --</option>
-                    <option value="09:00 น.">09:00 น.</option>
-                    <option value="10:00 น.">10:00 น.</option>
-                    <option value="11:00 น.">11:00 น.</option>
-                    <option value="12:00 น.">12:00 น.</option>
-                    <option value="13:00 น.">13:00 น.</option>
-                    <option value="14:00 น.">14:00 น.</option>
-                    <option value="15:00 น.">15:00 น.</option>
-                    <option value="16:00 น.">16:00 น.</option>
-                    <option value="17:00 น.">17:00 น.</option>
-                    <option value="18:00 น.">18:00 น.</option>
-                    <option value="19:00 น.">19:00 น.</option>
+                        class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50">
+                    <option value="">เลือกช่วงเวลา</option>
+                    <option value="9.00 น.">9.00 น.</option>
+                    <option value="10.00 น.">10.00 น.</option>
+                    <option value="11.00 น.">11.00 น.</option>
+                    <option value="12.00 น.">12.00 น.</option>
+                    <option value="13.00 น.">13.00 น.</option>
+                    <option value="14.00 น.">14.00 น.</option>
+                    <option value="15.00 น.">15.00 น.</option>
+                    <option value="16.00 น.">16.00 น.</option>
+                    <option value="17.00 น.">17.00 น.</option>
+                    <option value="18.00 น.">18.00 น.</option>
+                    <option value="19.00 น.">19.00 น.</option>
                 </select>
             </div>
 
-            <!-- ความคาดหวังในการร่วมโครงการกับ The Act ในครั้งนี้ (Expectations) -->
             <div>
-                <label for="expectations" class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-lightbulb text-blue-500 mr-2"></i>ความคาดหวังในการร่วมโครงการกับ The Act ในครั้งนี้
+                <label for="expectations" class="block text-blue-800 text-sm font-semibold mb-1">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586A1 1 0 0114 4.414L15.414 3A2 2 0 0014 0H6a2 2 0 00-1.414.586L4 2.414A1 1 0 012.586 3H1.5a.5.5 0 000 1H2a2 2 0 002 2zm12 2v8H4V7h12zM9 9a1 1 0 000 2h2a1 1 0 100-2H9z" clip-rule="evenodd"></path>
+                    </svg>
+                    ความคาดหวังในการร่วมโครงการกับ The Act ในครั้งนี้
                 </label>
                 <textarea id="expectations" name="expectations" rows="4"
-                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-blue-50 text-gray-800"
-                          placeholder="อธิบายความคาดหวังของคุณ"></textarea>
+                          class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50"></textarea>
             </div>
 
-            <!-- คุณรู้จักกิจกรรมของ The Act ผ่านช่องทางใดบ้าง? (How did you hear about us?) -->
-            <div class="space-y-2">
-                <label class="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                    <i class="fas fa-bullhorn text-blue-500 mr-2"></i>คุณรู้จักกิจกรรมของ The Act ผ่านช่องทางใดบ้าง?
-                    <span class="text-gray-500 text-xs">(เลือกได้หลายข้อ)</span>
+            <!-- How did you hear about us? -->
+            <div>
+                <label class="block text-blue-800 text-sm font-semibold mb-2">
+                    <svg class="inline-block w-4 h-4 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                    </svg>
+                    คุณรู้จักกิจกรรมของ The Act ผ่านช่องทางใดบ้าง? (เลือกได้หลายข้อ)
                 </label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-800">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcFacebook" name="source" value="Facebook"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcFacebook" class="ml-2 text-sm sm:text-base">Facebook</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcTikTok" name="source" value="TikTok"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcTikTok" class="ml-2 text-sm sm:text-base">TikTok</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcLineOA" name="source" value="Line OA"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcLineOA" class="ml-2 text-sm sm:text-base">Line OA</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcFriend" name="source" value="เพื่อนแนะนำ"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcFriend" class="ml-2 text-sm sm:text-base">เพื่อนแนะนำ</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcTeacher" name="source" value="ครูแนะนำ"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcTeacher" class="ml-2 text-sm sm:text-base">ครูแนะนำ</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcOnlineAd" name="source" value="โฆษณาออนไลน์"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcOnlineAd" class="ml-2 text-sm sm:text-base">โฆษณาออนไลน์</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcWebsite" name="source" value="เว็บไซต์ The Act"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcWebsite" class="ml-2 text-sm sm:text-base">เว็บไซต์ The Act</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcInstagram" name="source" value="Instagram"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcInstagram" class="ml-2 text-sm sm:text-base">Instagram</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcTwitter" name="source" value="Twitter"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcTwitter" class="ml-2 text-sm sm:text-base">Twitter</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcYoutube" name="source" value="Youtube"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcYoutube" class="ml-2 text-sm sm:text-base">Youtube</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcParent" name="source" value="ผู้ปกครองแนะนำ"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcParent" class="ml-2 text-sm sm:text-base">ผู้ปกครองด้วยกันแนะนำ</label>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="srcSenior" name="source" value="รุ่นพี่แนะนำ"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcSenior" class="ml-2 text-sm sm:text-base">รุ่นพี่แนะนำ</label>
-                    </div>
-                    <div class="flex items-center col-span-1 sm:col-span-2">
-                        <input type="checkbox" id="srcOther" name="source" value="อื่นๆ"
-                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="srcOther" class="ml-2 text-sm sm:text-base">อื่นๆ (กรุณาระบุ)</label>
-                        <input type="text" id="srcOtherText" name="sourceOtherText"
-                               class="ml-2 mt-1 block px-3 py-1 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm bg-blue-50 text-gray-800 w-full max-w-xs"
-                               placeholder="ระบุช่องทางอื่น">
-                    </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="Facebook" class="mr-2 text-blue-600 rounded"> Facebook
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="TikTok" class="mr-2 text-blue-600 rounded"> TikTok
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="Line OA" class="mr-2 text-blue-600 rounded"> Line OA
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="ครูแนะนำ" class="mr-2 text-blue-600 rounded"> ครูแนะนำ
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="โฆษณาออนไลน์" class="mr-2 text-blue-600 rounded"> โฆษณาออนไลน์
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="เว็บไซต์ The Act" class="mr-2 text-blue-600 rounded"> เว็บไซต์ The Act
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="Instagram" class="mr-2 text-blue-600 rounded"> Instagram
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="Twitter" class="mr-2 text-blue-600 rounded"> Twitter
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="Youtube" class="mr-2 text-blue-600 rounded"> Youtube
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="ผู้ปกครองด้วยกันแนะนำ" class="mr-2 text-blue-600 rounded"> ผู้ปกครองด้วยกันแนะนำ
+                    </label>
+                    <label class="flex items-center text-blue-700">
+                        <input type="checkbox" name="howHear" value="อื่น ๆ (กรุณาระบุ)" id="otherChannel" class="mr-2 text-blue-600 rounded"> อื่น ๆ (กรุณาระบุ)
+                    </label>
+                    <input type="text" id="otherChannelText" name="otherChannelText"
+                           class="w-full p-2 border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-blue-700 bg-blue-50 mt-1 hidden"
+                           placeholder="ระบุช่องทางอื่น">
                 </div>
             </div>
 
             <!-- Submit Button -->
             <button type="submit"
-                    class="w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold text-lg rounded-full shadow-lg hover:from-blue-600 hover:to-blue-800 transform transition duration-300 hover:scale-105 flex items-center justify-center gap-2">
-                <i class="fas fa-paper-plane mr-2"></i>ส่งใบสมัคร
+                    class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold text-lg rounded-xl shadow-lg
+                           hover:from-blue-600 hover:to-blue-800 transition transform hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                <svg class="inline-block w-6 h-6 mr-2 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                ส่งใบสมัคร
             </button>
         </form>
 
-        <!-- Submission Success Message (hidden by default) -->
-        <div id="successMessage" class="hidden mt-8 p-6 bg-green-100 border-2 border-green-400 text-green-800 rounded-xl text-center shadow-lg">
-            <i class="fas fa-check-circle text-green-600 text-4xl mb-4 animate-bounce"></i>
-            <p class="text-xl sm:text-2xl font-semibold mb-4">คุณได้สมัครเข้าร่วมโครงการ เรียบร้อยแล้ว</p>
-            <p class="text-base sm:text-lg">
-                อย่าลืม! กดเข้ากลุ่มไลน์ พ่อแม่เข้าใจ ลูกมีชัย TCAS – แนะแนวสอบเข้า มข.
+        <!-- Thank You Message Modal -->
+        <div id="thankYouMessage" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full border-4 border-blue-500">
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">ขอบคุณที่สมัคร!</h3>
+                <p class="text-gray-700 mb-6">
+                    คุณได้สมัครเข้าร่วมโครงการ เรียบร้อยแล้ว
+                    <br> อย่าลืม! กดเข้ากลุ่มไลน์ พ่อแม่เข้าใจ ลูกมีชัย TCAS – แนะแนวเข้า มข.
+                </p>
                 <a href="https://line.me/ti/g/VLAxWc53Nb" target="_blank"
-                   class="text-blue-600 font-bold hover:underline inline-block mt-2">คลิกที่นี่
-                   <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                   class="inline-block px-6 py-3 bg-green-500 text-white font-bold text-lg rounded-full shadow-md
+                          hover:bg-green-600 transition transform hover:-translate-y-0.5">
+                    คลิกที่นี่
+                    <svg class="inline-block w-5 h-5 ml-2 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
                 </a>
-            </p>
+                <button id="closeThankYou" class="mt-4 text-sm text-gray-500 hover:text-gray-700">ปิด</button>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('applicationForm');
-            const successMessage = document.getElementById('successMessage');
-            const srcOtherCheckbox = document.getElementById('srcOther');
-            const srcOtherTextBox = document.getElementById('srcOtherText');
+            const form = document.getElementById('registrationForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            const closeThankYouButton = document.getElementById('closeThankYou');
+            const otherChannelCheckbox = document.getElementById('otherChannel');
+            const otherChannelText = document.getElementById('otherChannelText');
+            const applicantEmailInput = document.getElementById('applicantEmail');
+            const emailError = document.getElementById('emailError');
 
-            // Toggle "Other" text box visibility
-            srcOtherTextBox.style.display = 'none'; // Initially hide
-            srcOtherCheckbox.addEventListener('change', function() {
-                srcOtherTextBox.style.display = this.checked ? 'block' : 'none';
-                if (!this.checked) {
-                    srcOtherTextBox.value = ''; // Clear value if unchecked
+            // Toggle "Other" text input visibility
+            otherChannelCheckbox.addEventListener('change', function() {
+                if (otherChannelCheckbox.checked) {
+                    otherChannelText.classList.remove('hidden');
+                    otherChannelText.setAttribute('required', 'true');
+                } else {
+                    otherChannelText.classList.add('hidden');
+                    otherChannelText.removeAttribute('required');
+                    otherChannelText.value = ''; // Clear value when hidden
                 }
             });
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
-
-                // Basic form validation (for checkbox)
-                if (!document.getElementById('acceptTerms').checked) {
-                    // You can replace this with a custom modal/message box if desired
-                    alert('โปรดยอมรับข้อกำหนดและเงื่อนไขก่อนส่งใบสมัคร');
-                    return;
+            // Real-time Gmail validation
+            applicantEmailInput.addEventListener('input', function() {
+                const email = applicantEmailInput.value;
+                const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+                if (email === '' || gmailPattern.test(email)) {
+                    emailError.classList.add('hidden');
+                    applicantEmailInput.setCustomValidity(''); // Clear custom validity message
+                } else {
+                    emailError.classList.remove('hidden');
+                    applicantEmailInput.setCustomValidity('กรุณากรอกอีเมล Gmail ที่ถูกต้อง'); // Set custom validity message
                 }
+            });
 
-                // Check if email is Gmail
-                const emailInput = document.getElementById('email');
-                if (!emailInput.value.endsWith('@gmail.com')) {
-                    alert('โปรดใช้อีเมล Gmail เท่านั้น');
-                    emailInput.focus();
-                    return;
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Manual validation for Gmail
+                const email = applicantEmailInput.value;
+                const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+                if (!gmailPattern.test(email)) {
+                    emailError.classList.remove('hidden');
+                    applicantEmailInput.focus();
+                    return; // Stop submission if validation fails
+                } else {
+                    emailError.classList.add('hidden');
                 }
 
                 // Collect form data
                 const formData = new FormData(form);
                 const data = {};
                 for (let [key, value] of formData.entries()) {
-                    // Handle checkbox group for 'source'
-                    if (key === 'source') {
+                    // Handle checkbox array for "howHear"
+                    if (key === 'howHear') {
                         if (!data[key]) {
                             data[key] = [];
                         }
@@ -359,53 +403,68 @@
                     }
                 }
 
-                // For 'source' checkboxes, join them into a single string
-                if (data.source) {
-                    if (srcOtherCheckbox.checked && srcOtherTextBox.value) {
-                         data.source = data.source.filter(item => item !== 'อื่นๆ').join(', ') + `, อื่นๆ (${srcOtherTextBox.value})`;
-                    } else {
-                        data.source = data.source.join(', ');
+                // Include 'otherChannelText' if 'otherChannel' is checked
+                if (otherChannelCheckbox.checked && otherChannelText.value.trim() !== '') {
+                    if (!data['howHear']) {
+                        data['howHear'] = [];
                     }
-                } else {
-                    data.source = ''; // If no source selected
+                    data['howHear'].push(`อื่น ๆ: ${otherChannelText.value.trim()}`);
                 }
-                // Remove the separate sourceOtherText field if not needed
-                delete data.sourceOtherText;
 
+                // Add timestamp (client-side, for demonstration)
+                data['timestamp'] = new Date().toLocaleString('th-TH');
 
-                // Convert data to URL-encoded string for Google Apps Script
-                const queryString = Object.keys(data)
-                    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-                    .join('&');
+                console.log('Form Data:', data);
 
-                // Send data to Google Apps Script
-                // You MUST replace 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE' with your deployed script URL.
-                fetch(form.action, {
+                // --- Placeholder for Google Sheet Integration ---
+                // IMPORTANT: Replace 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL' with your actual deployed Google Apps Script Web App URL.
+                // This URL will be obtained after you deploy the Apps Script as a Web App (see instructions above).
+                // Example using fetch (requires a server-side endpoint like Google Apps Script):
+                /*
+                fetch('https://script.google.com/macros/s/AKfycbzjQtcaIiicl8udQd9Qr29VRU8J73YgdB5yvMdiMDYjLDTdyHEZqfAGfaJJYGM4U2Tm/exec', {
                     method: 'POST',
-                    body: queryString,
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
                 })
-                .then(response => {
-                    // Check if the response is OK, but Google Apps Script often returns redirects or empty responses
-                    // so we primarily rely on it not throwing an error.
-                    if (response.ok || response.redirected) {
-                        form.reset(); // Clear form fields
-                        form.classList.add('hidden'); // Hide the form
-                        successMessage.classList.remove('hidden'); // Show success message
-
-                        // Optional: Scroll to the top or to the success message
-                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    } else {
-                        console.error('Form submission failed:', response.statusText);
-                        alert('เกิดข้อผิดพลาดในการส่งใบสมัคร กรุณาลองใหม่อีกครั้ง');
-                    }
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                    // Show thank you message
+                    thankYouMessage.classList.remove('hidden');
+                    form.reset(); // Clear the form
+                    otherChannelText.classList.add('hidden'); // Hide other input
+                    otherChannelText.removeAttribute('required');
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ตและลองใหม่อีกครั้ง');
+                    // Instead of alert(), you might display a custom modal or message box for errors
+                    // alert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองอีกครั้ง');
+                    const errorMessageDiv = document.createElement('div');
+                    errorMessageDiv.className = 'fixed inset-0 bg-red-800 bg-opacity-75 flex items-center justify-center p-4 z-50';
+                    errorMessageDiv.innerHTML = `
+                        <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full border-4 border-red-500">
+                            <h3 class="text-2xl font-bold text-red-800 mb-4">เกิดข้อผิดพลาด!</h3>
+                            <p class="text-gray-700 mb-6">เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองอีกครั้ง หรือติดต่อผู้ดูแลระบบ</p>
+                            <button class="px-4 py-2 bg-red-500 text-white rounded-md" onclick="this.parentElement.parentElement.remove()">ปิด</button>
+                        </div>
+                    `;
+                    document.body.appendChild(errorMessageDiv);
                 });
+                */
+
+                // For this example, we just show the thank you message immediately and log data to console
+                thankYouMessage.classList.remove('hidden');
+                form.reset(); // Clear the form
+                otherChannelText.classList.add('hidden'); // Hide other input
+                otherChannelText.removeAttribute('required');
+                emailError.classList.add('hidden'); // Hide email error
+
+            });
+
+            closeThankYouButton.addEventListener('click', function() {
+                thankYouMessage.classList.add('hidden');
             });
         });
     </script>
